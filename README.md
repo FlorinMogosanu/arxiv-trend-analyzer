@@ -48,6 +48,7 @@ ArXiv Trend Analyzer este un scraper web care colectează titluri de articole ș
 ---
 
 ## Rezultate experimentale — Varianta secvențială
+### Nota: Rularile s-au realizat pe 50 de articole.
 
 | Rulare | Timp (s) |
 |--------|----------|
