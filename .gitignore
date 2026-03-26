@@ -52,3 +52,4 @@ Thumbs.db
 .mypy_cache/
 
 results
+*.csv

@@ -6,6 +6,7 @@ import re
 from collections import Counter
 import matplotlib.pyplot as plt
 from datetime import datetime
+import time
 import os
 stop_words = set(stopwords.words("english"))
 
@@ -61,11 +62,14 @@ def generate_chart(words_list):
     plt.show()
 
 if __name__ == "__main__":
+    start = time.time()
     url = "https://arxiv.org/list/cs.AI/recent"
     soup = fetch_page(url)
     articles = parse_articles(soup)
     articles.to_csv("articles.csv", index=False)
     words = extract_words(articles)
     generate_chart(words)
+    end = time.time()
+    print(f"Time taken: {end - start:.2f} secs")
 
 
