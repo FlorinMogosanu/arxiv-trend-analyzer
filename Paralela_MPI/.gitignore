@@ -3,7 +3,7 @@
 *.iml
 *.iws
 *.ipr
-.idea
+.idea/Paralela_MPI.iml
 # Python
 __pycache__/
 *.py[cod]
