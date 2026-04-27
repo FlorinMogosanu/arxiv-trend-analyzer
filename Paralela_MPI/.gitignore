@@ -3,7 +3,7 @@
 *.iml
 *.iws
 *.ipr
-
+.idea
 # Python
 __pycache__/
 *.py[cod]
