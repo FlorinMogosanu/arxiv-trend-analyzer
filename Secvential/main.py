@@ -1,17 +1,18 @@
 import requests
-from bs4 import BeautifulSoup
-import pandas as pd
-from nltk.corpus import stopwords
-import re
-from collections import Counter
-import matplotlib.pyplot as plt
-from datetime import datetime
 import time
 import os
+import re
+import pandas as pd
+import matplotlib.pyplot as plt
+from bs4 import BeautifulSoup
+from nltk.corpus import stopwords
+from collections import Counter
+from datetime import datetime
+
 stop_words = set(stopwords.words("english"))
 
-def fetch_page(category_url):
-    result = requests.get(category_url)
+def fetch_page(category_url, par = None):
+    result = requests.get(category_url, params = par)
     html_soup = BeautifulSoup(result.text, "html.parser")
     return html_soup
 
@@ -64,7 +65,11 @@ def generate_chart(words_list):
 if __name__ == "__main__":
     start = time.time()
     url = "https://arxiv.org/list/cs.AI/recent"
-    soup = fetch_page(url)
+    params = {
+        "skip" : 0,
+        "show" : 1000
+    }
+    soup = fetch_page(url, par = params)
     articles = parse_articles(soup)
     articles.to_csv("articles.csv", index=False)
     words = extract_words(articles)
