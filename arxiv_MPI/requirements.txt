@@ -1,0 +1,7 @@
+mpi4py
+aiohttp
+beautifulsoup4
+lxml
+matplotlib
+nltk
+pandas
