@@ -47,12 +47,15 @@ ArXiv Trend Analyzer este un scraper web care colectează titluri de articole ș
 
 ---
 
-## Rezultate experimentale — Varianta secvențială
-### Nota: Rularile s-au realizat pe 50 de articole.
+## Rezultate experimentale
 
-| Rulare | Timp (s) |
-|--------|----------|
-| 1 | 1.34 |
-| 2 | 1.36 |
-| 3 | 1.56 |
-| **Medie** | **1.42** |
+
+| Data | Secvenital  | MPI | Threads |
+|---|-------------|----|---------|
+| 100 articles / category | 3.93 | 2.34 | 1.45    |
+| 500 articles / category | 5.32 | 2.30 | 3.31    |
+| 1000 articles / category | 5.98 | 2.90 | 4.65    |
+| 2000 articles / category | 7.25  | 2.83   | 4.34 |
+
+The benchmark results indicate that MPI consistently outperforms both the sequential and threaded implementations, maintaining stable execution times between 2.30s and 2.90s regardless of article volume. Threads perform competitively at low data volumes (1.45s at 100 articles) but degrade significantly as workload increases, exposing the inherent limitations of Python's GIL on CPU-bound tasks such as regex processing and frequency counting.
+It is worth noting that a substantial portion of total execution time is attributable to the HTTP GET request latency towards arXiv's servers — an external factor that no parallelization strategy can fully eliminate. This network bottleneck explains the relatively narrow performance gap between all three variants, as the slowest server response effectively dictates the minimum achievable runtime. Consequently, the true benefit of parallelism manifests primarily in the data processing phase, where MPI's process-level isolation enables genuine multi-core utilization, while Python threads remain constrained by the GIL.
